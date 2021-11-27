@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Navbar, Container } from "react-bootstrap"
+import { getMultiplePokemons, getPokemon } from "../../helpers/fetchWrapper"
 
 const Header = () => {
   const { Brand } = Navbar
