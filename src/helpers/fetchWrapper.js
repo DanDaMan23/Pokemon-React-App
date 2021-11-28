@@ -11,9 +11,13 @@ export const getMultiplePokemons = async (number) => {
   if (isNaN(number)) {
     throw new Error("It has to be a number")
   }
-  const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${number}`)
-  const data = await res.json()
-  return data
+  const pokemonList = []
+
+  for (let i = 1; i <= number; i++) {
+    await getPokemon(i).then(data => pokemonList.push(data))
+  }
+
+  return pokemonList
 }
 
 export const getTypes = async () => {
