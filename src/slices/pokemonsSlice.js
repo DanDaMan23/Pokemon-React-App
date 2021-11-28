@@ -3,12 +3,10 @@ import { createSlice } from "@reduxjs/toolkit"
 const pokemonsSlice = createSlice({
   name: "pokemons",
   initialState: {
-    pokemons: [],
-    pokemon: {}
+    pokemons: []
   },
   reducers: {
     setPokemons: (state, { payload }) => {
-      console.log(payload)
       state.pokemons = payload
     }
   }
