@@ -8,6 +8,7 @@ const Header = () => {
     <Navbar bg='dark' variant='dark' expand='lg'>
       <Container>
         <Brand href='#'>Pokemon React API</Brand>
+
       </Container>
     </Navbar>
   )
