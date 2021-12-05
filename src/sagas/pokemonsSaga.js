@@ -1,6 +1,6 @@
 import { put, call } from "redux-saga/effects"
 import { getMultiplePokemons } from "../helpers/pokemonApi"
-import { setPokemons } from "../slices/pokemonsSlice"
+import { setPokemons, setPokemonsError } from "../slices/pokemonsSlice"
 import { fetching, fetchingCompleted } from "../slices/spinnerSlice"
 
 const pokemonsSaga = function* (payload) {
@@ -8,7 +8,9 @@ const pokemonsSaga = function* (payload) {
   try {
     const data = yield call(getMultiplePokemons, payload)
     yield put(setPokemons(data))
-  } catch {}
+  } catch (error) {
+    yield put(setPokemonsError(error.message))
+  }
   yield put(fetchingCompleted())
 }
 
