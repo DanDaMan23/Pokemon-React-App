@@ -1,10 +1,11 @@
 import React from "react"
-import { Container, Row, Col } from "react-bootstrap"
+import { Container, Row, Col, Spinner, Modal } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import PokemonCardTemplate from "../../templates/pokemonCardTemplate"
 
 const Pokemons = () => {
   const pokemons = useSelector((state) => state.pokemons.pokemons)
+  const isLoading = useSelector((state) => state.spinner.isLoading)
 
   return (
     <Container>
@@ -20,6 +21,12 @@ const Pokemons = () => {
             </Col>
           ))}
       </Row>
+      <Modal backdrop='static' show={isLoading} centered>
+        <Modal.Body className='d-flex justify-content-center'>
+          <Spinner animation='border' />
+          <h2>Loading</h2>
+        </Modal.Body>
+      </Modal>
     </Container>
   )
 }
