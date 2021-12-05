@@ -1,8 +1,9 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit"
-import pokemonsSlice from "../slices/pokemonsSlice"
 import createSagaMiddleware from "redux-saga"
 import { all } from "redux-saga/effects"
 import watchPokemonSagas from "../sagas/pokemonsSaga"
+import spinnerSlice from "../slices/spinnerSlice"
+import pokemonsSlice from "../slices/pokemonsSlice"
 
 const rootSaga = function* () {
   yield all([watchPokemonSagas()])
@@ -11,7 +12,7 @@ const rootSaga = function* () {
 const sagaMiddleware = createSagaMiddleware()
 
 const store = configureStore({
-  reducer: { pokemons: pokemonsSlice },
+  reducer: { pokemons: pokemonsSlice, spinner: spinnerSlice },
   middleware: [...getDefaultMiddleware(), sagaMiddleware]
 })
 
