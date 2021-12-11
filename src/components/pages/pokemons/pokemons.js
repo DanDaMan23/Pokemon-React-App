@@ -2,6 +2,7 @@ import React from "react"
 import { Container, Row, Col, Spinner, Modal } from "react-bootstrap"
 import { useSelector } from "react-redux"
 import PokemonCardTemplate from "../../templates/pokemonCardTemplate"
+import PokemonSearchForm from "../../forms/pokemonSearchForm"
 
 const Pokemons = () => {
   const pokemons = useSelector((state) => state.pokemons.pokemons)
@@ -9,6 +10,7 @@ const Pokemons = () => {
 
   return (
     <Container>
+      <PokemonSearchForm />
       <Row xs={1} sm={2} md={3}>
         {pokemons &&
           pokemons.map((pokemon) => (
