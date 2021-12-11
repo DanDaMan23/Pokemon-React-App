@@ -1,16 +1,19 @@
 import React from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Form, Button } from "react-bootstrap"
 import { useFormik } from "formik"
+import { setPokemonIdentifierRequest } from "../../slices/pokemonSlice"
 
 const PokemonSearchForm = () => {
   const { Group, Label, Control } = Form
+  const dispatch = useDispatch()
 
   const formik = useFormik({
     initialValues: {
       pokemon: ""
     },
-    onSubmit: async (values, { resetForm }) => {
-      await console.log(values)
+    onSubmit: (values, { resetForm }) => {
+      dispatch(setPokemonIdentifierRequest(values.pokemon))
       resetForm()
     }
   })
