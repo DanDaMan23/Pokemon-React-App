@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { Card } from "react-bootstrap"
 import { titleCase } from "title-case"
 
@@ -29,6 +30,12 @@ const PokemonCardTemplate = ({ name, types, abilities }) => {
       </Body>
     </Card>
   )
+}
+
+PokemonCardTemplate.propTypes = {
+  name: PropTypes.string.isRequired,
+  types: PropTypes.array.isRequired,
+  abilities: PropTypes.array.isRequired
 }
 
 export default PokemonCardTemplate
