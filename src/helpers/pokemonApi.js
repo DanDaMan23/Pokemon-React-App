@@ -1,8 +1,12 @@
+import { get } from "./apiHelpers/fetchWrapper"
+
 export const getPokemon = async (pokemon) => {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
   const data = await res.json()
   return data
 }
+
+export const getPokemons = async () => get("https://pokeapi.co/api/v2/pokemon/")
 
 export const getMultiplePokemons = async (number) => {
   if (number < 1) {
@@ -14,14 +18,10 @@ export const getMultiplePokemons = async (number) => {
   const pokemonList = []
 
   for (let i = 1; i <= number; i++) {
-    await getPokemon(i).then(data => pokemonList.push(data))
+    await getPokemon(i).then((data) => pokemonList.push(data))
   }
 
   return pokemonList
 }
 
-export const getTypes = async () => {
-  const res = await fetch(`https://pokeapi.co/api/v2/type`)
-  const data = await res.json
-  return data
-}
+export const getTypes = async () => get("https://pokeapi.co/api/v2/type/")

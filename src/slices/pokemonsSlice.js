@@ -1,21 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+const initialState = {
+  pokemons: {
+    data: null,
+    error: null
+  },
+  nextPokemons: {
+    data: null,
+    error: null
+  }
+}
+
 const pokemonsSlice = createSlice({
   name: "pokemons",
-  initialState: {
-    pokemons: [],
-    error: ""
-  },
+  initialState: initialState,
   reducers: {
-    setPokemons: (state, { payload }) => {
-      state.pokemons = payload
-      state.error = ""
+    getPokemonsRequest: (state) => {
+      state.pokemons = initialState.pokemons
     },
-    setPokemonsError: (state, { payload }) => {
-      state.error = payload
+    getPokemonsSuccess: (state, { payload }) => {
+      state.pokemons.data = payload
+    },
+    getPokemonsError: (state, { payload }) => {
+      state.pokemons.error = payload
+    },
+    getNextPokemonsRequest: (state) => {
+      state.nextPokemons = initialState.nextPokemons
+    },
+    getNextPokemonsSuccess: (state, { payload }) => {
+      state.nextPokemons.data = payload
+    },
+    getNextPokemonsError: (state, { payload }) => {
+      state.nextPokemons.error = payload
     }
   }
 })
 
-export const { setPokemons, setPokemonsError } = pokemonsSlice.actions
+export const {
+  getPokemonsRequest,
+  getPokemonsSuccess,
+  getPokemonsError,
+  getNextPokemonsRequest,
+  getNextPokemonsSuccess,
+  getNextPokemonsError
+} = pokemonsSlice.actions
 export default pokemonsSlice.reducer

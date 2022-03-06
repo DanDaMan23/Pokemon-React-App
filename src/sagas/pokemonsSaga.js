@@ -1,21 +1,41 @@
-import { put, call } from "redux-saga/effects"
-import { getMultiplePokemons } from "../helpers/pokemonApi"
-import { setPokemons, setPokemonsError } from "../slices/pokemonsSlice"
-import { fetching, fetchingCompleted } from "../slices/spinnerSlice"
+import { put, call, takeLatest } from "redux-saga/effects"
+import { get } from "../helpers/apiHelpers/fetchWrapper"
+import { getPokemons } from "../helpers/pokemonApi"
+import {
+  getPokemonsRequest,
+  getPokemonsSuccess,
+  getPokemonsError,
+  getNextPokemonsRequest,
+  getNextPokemonsSuccess,
+  getNextPokemonsError
+} from "../slices/pokemonsSlice"
+import { fetching, fetchingCompleted, fetchingMore, fetchingMoreCompleted } from "../slices/spinnerSlice"
 
-const pokemonsSaga = function* (payload) {
+const getPokemonsSaga = function* () {
   yield put(fetching())
   try {
-    const data = yield call(getMultiplePokemons, payload)
-    yield put(setPokemons(data))
+    const data = yield call(getPokemons)
+    yield put(getPokemonsSuccess(data))
   } catch (error) {
-    yield put(setPokemonsError(error.message))
+    yield put(getPokemonsError(error.message))
   }
   yield put(fetchingCompleted())
 }
 
+const getNextPokemonsSaga = function* ({ payload }) {
+  yield put(fetchingMore())
+  try {
+    const data = yield call(get, payload)
+    yield put(getNextPokemonsSuccess(data))
+  } catch (error) {
+    yield put(getNextPokemonsError(error.message))
+  }
+  yield put(fetchingMoreCompleted())
+}
+
 const watchPokemonSagas = function* () {
-  yield pokemonsSaga(50)
+  yield takeLatest(getPokemonsRequest.type, getPokemonsSaga)
+  yield takeLatest(getNextPokemonsRequest.type, getNextPokemonsSaga)
 }
 
 export default watchPokemonSagas
