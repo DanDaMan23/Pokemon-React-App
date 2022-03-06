@@ -11,7 +11,6 @@ const pokemonSlice = createSlice({
     setPokemonIdentifierSuccess: (state, { payload }) => {
       state.pokemon = payload
       state.error = null
-      console.log(state.pokemon)
     },
     setPokemonIdentifierError: (state, { payload }) => {
       state.error = payload
