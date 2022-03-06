@@ -1,22 +1,27 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Container, Row, Col, Spinner, Modal } from "react-bootstrap"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { getPokemonsRequest } from "../../../slices/pokemonsSlice"
 import PokemonCardTemplate from "../../templates/pokemonCardTemplate"
 
 const Pokemons = () => {
-  const pokemons = useSelector((state) => state.pokemons.pokemons)
+  const pokemonsStore = useSelector((state) => state.pokemons.pokemons)
   const isLoading = useSelector((state) => state.spinner.isLoading)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getPokemonsRequest())
+  }, [dispatch])
 
   return (
     <Container>
       <Row xs={1} sm={2} md={3}>
-        {pokemons &&
-          pokemons.map((pokemon) => (
-            <Col key={pokemon.id}>
+        {pokemonsStore.data && pokemonsStore.data.results &&
+          pokemonsStore.data.results.map((pokemon) => (
+            <Col key={pokemon.url}>
               <PokemonCardTemplate
                 name={pokemon.name}
-                types={pokemon.types}
-                abilities={pokemon.abilities}
+                stats={pokemon.url}
               />
             </Col>
           ))}
