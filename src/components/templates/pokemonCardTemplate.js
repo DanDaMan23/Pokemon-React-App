@@ -7,7 +7,7 @@ const PokemonCardTemplate = ({ name }) => {
   const { Body, Title } = Card
 
   return (
-    <Card>
+    <Card className='mb-3'>
       <Body>
         <Title>{titleCase(name)}</Title>
       </Body>
@@ -16,7 +16,7 @@ const PokemonCardTemplate = ({ name }) => {
 }
 
 PokemonCardTemplate.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
   // url: PropTypes.string.isRequired
 }
 
