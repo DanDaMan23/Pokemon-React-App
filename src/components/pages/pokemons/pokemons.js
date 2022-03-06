@@ -11,6 +11,7 @@ const Pokemons = () => {
   const pokemonsStore = useSelector((state) => state.pokemons.pokemons)
   const nextPokemonsStore = useSelector((state) => state.pokemons.nextPokemons)
   const isLoading = useSelector((state) => state.spinner.isLoading)
+  const isLoadingMore = useSelector((state) => state.spinner.isLoadingMore)
   const dispatch = useDispatch()
 
   const [pokemonsList, setPokemonsList] = useState([])
@@ -42,13 +43,13 @@ const Pokemons = () => {
   }, [nextPokemonsStore.data])
 
   return (
-    <Container className="mt-3">
+    <Container className='mt-3'>
       <Row xs={1} sm={2} md={3}>
         {pokemonsList.map((pokemon) => (
-            <Col key={pokemon.url}>
-              <PokemonCardTemplate name={pokemon.name} stats={pokemon.url} />
-            </Col>
-          ))}
+          <Col key={pokemon.url}>
+            <PokemonCardTemplate name={pokemon.name} stats={pokemon.url} />
+          </Col>
+        ))}
       </Row>
       <Modal backdrop='static' show={isLoading} centered>
         <Modal.Body className='d-flex justify-content-center'>
@@ -61,7 +62,7 @@ const Pokemons = () => {
           variant='dark'
           onClick={() => dispatch(getNextPokemonsRequest(nextLink))}
         >
-          {isLoading ? <Spinner animation='border' /> : "Load More"}
+          {isLoadingMore ? <Spinner animation='border' /> : "Load More"}
         </Button>
       </div>
     </Container>

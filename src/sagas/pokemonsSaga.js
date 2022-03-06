@@ -9,7 +9,7 @@ import {
   getNextPokemonsSuccess,
   getNextPokemonsError
 } from "../slices/pokemonsSlice"
-import { fetching, fetchingCompleted } from "../slices/spinnerSlice"
+import { fetching, fetchingCompleted, fetchingMore, fetchingMoreCompleted } from "../slices/spinnerSlice"
 
 const getPokemonsSaga = function* () {
   yield put(fetching())
@@ -23,12 +23,14 @@ const getPokemonsSaga = function* () {
 }
 
 const getNextPokemonsSaga = function* ({ payload }) {
+  yield put(fetchingMore())
   try {
     const data = yield call(get, payload)
     yield put(getNextPokemonsSuccess(data))
   } catch (error) {
     yield put(getNextPokemonsError(error.message))
   }
+  yield put(fetchingMoreCompleted())
 }
 
 const watchPokemonSagas = function* () {
