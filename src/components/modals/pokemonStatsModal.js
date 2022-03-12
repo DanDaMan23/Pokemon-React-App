@@ -1,13 +1,22 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { Button, Modal } from "react-bootstrap"
+import { useDispatch, useSelector } from "react-redux"
+import { getPokemonRequest } from "../../slices/pokemonsSlice"
 
 const PokemonStatsModal = ({ url }) => {
+  const dispatch = useDispatch()
+  const pokemonStore = useSelector((state) => state.pokemons.pokemon)
+
+
   const { Header, Title, Body, Footer } = Modal
 
   const [show, setShow] = useState(false)
 
-  const showModal = () => setShow(true)
+  const showModal = () => {
+    setShow(true)
+    dispatch(getPokemonRequest(url))
+  }
   const closeModal = () => setShow(false)
 
   return (

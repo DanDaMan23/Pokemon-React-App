@@ -8,6 +8,10 @@ const initialState = {
   nextPokemons: {
     data: null,
     error: null
+  },
+  pokemon: {
+    data: null,
+    error: null
   }
 }
 
@@ -32,6 +36,18 @@ const pokemonsSlice = createSlice({
     },
     getNextPokemonsError: (state, { payload }) => {
       state.nextPokemons.error = payload
+    },
+    getPokemonRequest: (state) => {
+      state.pokemon = initialState.pokemon
+    },
+    getPokemonSuccess: (state, { payload }) => {
+      state.pokemon.data = payload
+    },
+    getPokemonError: (state, { payload }) => {
+      state.pokemon.error = payload
+    },
+    resetPokemon: (state) => {
+      state.pokemon = initialState.pokemon
     }
   }
 })
@@ -42,6 +58,10 @@ export const {
   getPokemonsError,
   getNextPokemonsRequest,
   getNextPokemonsSuccess,
-  getNextPokemonsError
+  getNextPokemonsError,
+  getPokemonRequest,
+  getPokemonSuccess,
+  getPokemonError,
+  resetPokemon
 } = pokemonsSlice.actions
 export default pokemonsSlice.reducer

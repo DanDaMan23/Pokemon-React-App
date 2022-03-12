@@ -7,9 +7,17 @@ import {
   getPokemonsError,
   getNextPokemonsRequest,
   getNextPokemonsSuccess,
-  getNextPokemonsError
+  getNextPokemonsError,
+  getPokemonRequest,
+  getPokemonSuccess,
+  getPokemonError
 } from "../slices/pokemonsSlice"
-import { fetching, fetchingCompleted, fetchingMore, fetchingMoreCompleted } from "../slices/spinnerSlice"
+import {
+  fetching,
+  fetchingCompleted,
+  fetchingMore,
+  fetchingMoreCompleted
+} from "../slices/spinnerSlice"
 
 const getPokemonsSaga = function* () {
   yield put(fetching())
@@ -33,9 +41,21 @@ const getNextPokemonsSaga = function* ({ payload }) {
   yield put(fetchingMoreCompleted())
 }
 
+const getPokemonSaga = function* ({ payload }) {
+  yield put(fetching())
+  try {
+    const data = yield call(get, payload)
+    yield put(getPokemonSuccess(data))
+  } catch (error) {
+    yield put(getPokemonError(error.message))
+  }
+  yield put(fetchingCompleted())
+}
+
 const watchPokemonSagas = function* () {
   yield takeLatest(getPokemonsRequest.type, getPokemonsSaga)
   yield takeLatest(getNextPokemonsRequest.type, getNextPokemonsSaga)
+  yield takeLatest(getPokemonRequest.type, getPokemonSaga)
 }
 
 export default watchPokemonSagas
