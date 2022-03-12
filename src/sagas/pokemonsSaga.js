@@ -42,14 +42,14 @@ const getNextPokemonsSaga = function* ({ payload }) {
 }
 
 const getPokemonSaga = function* ({ payload }) {
-  yield put(fetching())
+  yield put(fetchingMore())
   try {
     const data = yield call(get, payload)
     yield put(getPokemonSuccess(data))
   } catch (error) {
     yield put(getPokemonError(error.message))
   }
-  yield put(fetchingCompleted())
+  yield put(fetchingMoreCompleted())
 }
 
 const watchPokemonSagas = function* () {
