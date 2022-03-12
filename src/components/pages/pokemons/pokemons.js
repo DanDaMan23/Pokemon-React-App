@@ -23,7 +23,7 @@ const Pokemons = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if (pokemonsStore.data && pokemonsStore.data.results) {
+    if (pokemonsStore.data?.results) {
       setPokemonsList((prevState) => [
         ...prevState,
         ...pokemonsStore.data.results
@@ -33,7 +33,7 @@ const Pokemons = () => {
   }, [pokemonsStore.data])
 
   useEffect(() => {
-    if (nextPokemonsStore.data && nextPokemonsStore.data.results) {
+    if (nextPokemonsStore.data?.results) {
       setPokemonsList((prevState) => [
         ...prevState,
         ...nextPokemonsStore.data.results
