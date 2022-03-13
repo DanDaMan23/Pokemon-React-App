@@ -44,6 +44,7 @@ const Pokemons = () => {
 
   return (
     <Container className='mt-3'>
+      <h1 className='mb-5'>All Pokemons</h1>
       <Row xs={1} sm={2} md={3}>
         {pokemonsList.map((pokemon) => (
           <Col key={pokemon.url}>

@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import PropTypes from "prop-types"
-import { Button, Modal, Spinner } from "react-bootstrap"
+import { Button, ListGroup, Modal, Spinner } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { getPokemonRequest } from "../../slices/pokemonsSlice"
 import { titleCase } from "title-case"
@@ -11,6 +11,7 @@ const PokemonStatsModal = ({ url }) => {
   const isLoadingMore = useSelector((state) => state.spinner.isLoadingMore)
 
   const { Header, Title, Body, Footer } = Modal
+  const { Item } = ListGroup
 
   const [show, setShow] = useState(false)
 
@@ -24,11 +25,49 @@ const PokemonStatsModal = ({ url }) => {
     <Title>{titleCase(pokemonStore.data ? pokemonStore.data.name : "")}</Title>
   )
 
-  const body = () => {
-    return <Body>All Stats</Body>
+  const types = () => {
+    if (pokemonStore.data?.types) {
+      return (
+        <div className='mb-3'>
+          <h4>Types</h4>
+          <ListGroup horizontal>
+            {pokemonStore.data.types.map((type) => (
+              <Item key={type.type.name}>{type.type.name}</Item>
+            ))}
+          </ListGroup>
+        </div>
+      )
+    } else {
+      return ""
+    }
   }
 
-  console.log(pokemonStore)
+  const abilities = () => {
+    if (pokemonStore.data?.abilities) {
+      return (
+        <div className='mb-3'>
+          <h4>Abilities</h4>
+          <ListGroup>
+            {pokemonStore.data.abilities.map((ability) => (
+              <Item key={ability.ability.name}>{ability.ability.name}</Item>
+            ))}
+          </ListGroup>
+        </div>
+      )
+    } else {
+      return ""
+    }
+  }
+
+  const body = () => {
+    return (
+      <Body scrollable='true'>
+        {types()}
+        {abilities()}
+      </Body>
+    )
+  }
+
   return (
     <>
       <Button variant='dark' onClick={showModal}>
