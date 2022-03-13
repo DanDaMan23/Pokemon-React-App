@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { getPokemonRequest } from "../../slices/pokemonsSlice"
 import { titleCase } from "title-case"
 
-import '../pages/pokemonTypes/pokemonTypes.css'
+import "../pages/pokemonTypes/pokemonTypes.css"
 
 const PokemonStatsModal = ({ url }) => {
   const dispatch = useDispatch()
@@ -34,7 +34,9 @@ const PokemonStatsModal = ({ url }) => {
           <h4>Types</h4>
           <ListGroup horizontal>
             {pokemonStore.data.types.map((type) => (
-              <Item key={type.type.name} className={type.type.name}>{titleCase(type.type.name)}</Item>
+              <Item key={type.type.name} className={type.type.name}>
+                {titleCase(type.type.name)}
+              </Item>
             ))}
           </ListGroup>
         </div>
