@@ -23,7 +23,7 @@ const Pokemons = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if (pokemonsStore.data && pokemonsStore.data.results) {
+    if (pokemonsStore.data?.results) {
       setPokemonsList((prevState) => [
         ...prevState,
         ...pokemonsStore.data.results
@@ -33,7 +33,7 @@ const Pokemons = () => {
   }, [pokemonsStore.data])
 
   useEffect(() => {
-    if (nextPokemonsStore.data && nextPokemonsStore.data.results) {
+    if (nextPokemonsStore.data?.results) {
       setPokemonsList((prevState) => [
         ...prevState,
         ...nextPokemonsStore.data.results
@@ -44,6 +44,7 @@ const Pokemons = () => {
 
   return (
     <Container className='mt-3'>
+      <h1 className='mb-5'>All Pokemons</h1>
       <Row xs={1} sm={2} md={3}>
         {pokemonsList.map((pokemon) => (
           <Col key={pokemon.url}>
