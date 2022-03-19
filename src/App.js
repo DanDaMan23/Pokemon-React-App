@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom"
 import store from "./store/store"
 import HomePage from "./components/pages/homePage/homePage"
 import ModalSpinner from "./components/modalSpinner/modalSpinner"
+import Footer from "./components/footer/footer"
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path='/pokemons' element={<Pokemons />} />
           <Route path='/types' element={<PokemonTypes />} />
         </Routes>
+        <Footer />
       </div>
       <ModalSpinner />
     </Provider>
