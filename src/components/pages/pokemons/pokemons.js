@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Container, Row, Col, Spinner, Modal, Button } from "react-bootstrap"
+import { Container, Row, Col, Spinner, Button } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux"
 import {
   getNextPokemonsRequest,
@@ -11,7 +11,6 @@ import PokemonSearchForm from "../../forms/pokemonSearchForm"
 const Pokemons = () => {
   const pokemonsStore = useSelector((state) => state.pokemons.pokemons)
   const nextPokemonsStore = useSelector((state) => state.pokemons.nextPokemons)
-  const isLoading = useSelector((state) => state.spinner.isLoading)
   const isLoadingMore = useSelector((state) => state.spinner.isLoadingMore)
   const dispatch = useDispatch()
 
@@ -24,7 +23,7 @@ const Pokemons = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if (pokemonsStore.data && pokemonsStore.data.results) {
+    if (pokemonsStore.data?.results) {
       setPokemonsList((prevState) => [
         ...prevState,
         ...pokemonsStore.data.results
@@ -34,7 +33,7 @@ const Pokemons = () => {
   }, [pokemonsStore.data])
 
   useEffect(() => {
-    if (nextPokemonsStore.data && nextPokemonsStore.data.results) {
+    if (nextPokemonsStore.data?.results) {
       setPokemonsList((prevState) => [
         ...prevState,
         ...nextPokemonsStore.data.results
@@ -46,6 +45,7 @@ const Pokemons = () => {
   return (
     <Container className='mt-3'>
       <PokemonSearchForm />
+      <h1 className='mb-5'>All Pokemons</h1>
       <Row xs={1} sm={2} md={3}>
         {pokemonsList.map((pokemon) => (
           <Col key={pokemon.url}>
@@ -53,12 +53,6 @@ const Pokemons = () => {
           </Col>
         ))}
       </Row>
-      <Modal backdrop='static' show={isLoading} centered>
-        <Modal.Body className='d-flex justify-content-center'>
-          <Spinner animation='border' />
-          <h2>Loading</h2>
-        </Modal.Body>
-      </Modal>
       <div className='mt-4 d-flex justify-content-center'>
         <Button
           variant='dark'
