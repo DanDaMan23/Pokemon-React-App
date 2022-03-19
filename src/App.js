@@ -6,6 +6,7 @@ import { Provider } from "react-redux"
 import { Routes, Route } from "react-router-dom"
 import store from "./store/store"
 import HomePage from "./components/pages/homePage/homePage"
+import ModalSpinner from "./components/modalSpinner/modalSpinner"
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path='/types' element={<PokemonTypes />} />
         </Routes>
       </div>
+      <ModalSpinner />
     </Provider>
   )
 }

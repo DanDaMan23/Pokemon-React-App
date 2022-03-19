@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Container, Row, Col, Spinner, Modal, Button } from "react-bootstrap"
+import { Container, Row, Col, Spinner, Button } from "react-bootstrap"
 import { useSelector, useDispatch } from "react-redux"
 import {
   getNextPokemonsRequest,
@@ -10,7 +10,6 @@ import PokemonCardTemplate from "../../templates/pokemonCardTemplate"
 const Pokemons = () => {
   const pokemonsStore = useSelector((state) => state.pokemons.pokemons)
   const nextPokemonsStore = useSelector((state) => state.pokemons.nextPokemons)
-  const isLoading = useSelector((state) => state.spinner.isLoading)
   const isLoadingMore = useSelector((state) => state.spinner.isLoadingMore)
   const dispatch = useDispatch()
 
@@ -52,12 +51,6 @@ const Pokemons = () => {
           </Col>
         ))}
       </Row>
-      <Modal backdrop='static' show={isLoading} centered>
-        <Modal.Body className='d-flex justify-content-center'>
-          <Spinner animation='border' />
-          <h2>Loading</h2>
-        </Modal.Body>
-      </Modal>
       <div className='mt-4 d-flex justify-content-center'>
         <Button
           variant='dark'
