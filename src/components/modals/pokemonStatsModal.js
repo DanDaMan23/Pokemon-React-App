@@ -7,7 +7,7 @@ import { titleCase } from "title-case"
 
 import "../pages/pokemonTypes/pokemonTypes.css"
 
-const PokemonStatsModal = ({ url }) => {
+const PokemonStatsModal = ({ url, resetForm }) => {
   const dispatch = useDispatch()
   const pokemonStore = useSelector((state) => state.pokemons.pokemon)
   const isLoadingMore = useSelector((state) => state.spinner.isLoadingMore)
@@ -21,7 +21,10 @@ const PokemonStatsModal = ({ url }) => {
     setShow(true)
     dispatch(getPokemonRequest(url))
   }
-  const closeModal = () => setShow(false)
+  const closeModal = () => {
+    setShow(false)
+    resetForm()
+  }
 
   const title = () => (
     <Title>{titleCase(pokemonStore.data ? pokemonStore.data.name : "")}</Title>
@@ -93,8 +96,13 @@ const PokemonStatsModal = ({ url }) => {
   )
 }
 
+PokemonStatsModal.defaultProps = {
+  resetForm: () => {}
+}
+
 PokemonStatsModal.propTypes = {
-  url: PropTypes.string.isRequired
+  url: PropTypes.string.isRequired,
+  resetForm: PropTypes.func
 }
 
 export default PokemonStatsModal
