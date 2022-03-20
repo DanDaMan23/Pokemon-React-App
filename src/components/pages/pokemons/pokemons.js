@@ -6,6 +6,7 @@ import {
   getPokemonsRequest
 } from "../../../slices/pokemonsSlice"
 import PokemonCardTemplate from "../../templates/pokemonCardTemplate"
+import PokemonSearchForm from "../../forms/pokemonSearchForm"
 
 const Pokemons = () => {
   const pokemonsStore = useSelector((state) => state.pokemons.pokemons)
@@ -43,6 +44,7 @@ const Pokemons = () => {
 
   return (
     <Container className='mt-3'>
+      <PokemonSearchForm />
       <h1 className='mb-5'>All Pokemons</h1>
       <Row xs={1} sm={2} md={3}>
         {pokemonsList.map((pokemon) => (

@@ -45,6 +45,9 @@ const getPokemonSaga = function* ({ payload }) {
   yield put(fetchingMore())
   try {
     const data = yield call(get, payload)
+    if (payload === "https://pokeapi.co/api/v2/pokemon/") {
+      throw new Error("Pokemon cannot be blank")
+    }
     yield put(getPokemonSuccess(data))
   } catch (error) {
     yield put(getPokemonError(error.message))
