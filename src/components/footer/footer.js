@@ -6,6 +6,7 @@ const Footer = () => {
     <>
       <div className='mt-4 mb-1 d-flex justify-content-center'>
         <Button
+          data-testid='scroll-top-button'
           variant='dark'
           onClick={() => {
             window.scrollTo(0, 0)
