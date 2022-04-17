@@ -16,7 +16,7 @@ const PokemonSearchForm = () => {
   })
 
   return (
-    <div className='mb-3'>
+    <div className='mb-3' data-testid="pokemon-search-form">
       <Form onSubmit={formik.handleSubmit}>
         <Group>
           <Control
