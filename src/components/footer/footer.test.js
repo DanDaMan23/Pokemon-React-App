@@ -1,27 +1,28 @@
-import { fireEvent, render, screen } from "@testing-library/react"
+import "@testing-library/jest-dom/extend-expect"
+import { render, screen } from "@testing-library/react"
 import Footer from "./footer"
 
 describe("Footer Component", () => {
   const component = <Footer />
-
-  it("renders the component", () => {
+  it("render Pokemon React App as a text", () => {
     // Arrange
     render(component)
 
     // Act
 
     // Assert
-    expect(component).toMatchSnapshot()
+    const pokemonReactFooterTitle = screen.getByText("Pokemon React App")
+    expect(pokemonReactFooterTitle).toBeInTheDocument()
   })
 
-  it("scrolls up when scroll top is clicked", () => {
+  it("renders Scroll Top button by text", () => {
     // Arrange
     render(component)
 
     // Act
-    const buttonElement = screen.getByTestId("scroll-top-button")
 
     // Assert
-    fireEvent.scroll(buttonElement, { target: { scrollX: 0, scrollY: 0 } })
+    const scrollTopButton = screen.getByText("Scroll Top")
+    expect(scrollTopButton).toBeInTheDocument()
   })
 })
